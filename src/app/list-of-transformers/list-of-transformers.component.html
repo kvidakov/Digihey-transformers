@@ -4,23 +4,24 @@
 <p>A war between Autobots and Decepticons is just around the corner.. </p>
 <ul>
   <li *ngFor="let fac of factions">
-    <span>{{ fac.name }}</span>  <br>
+    <span>{{ fac.name }}</span> &nbsp; <a [routerLink]="['/add'+fac.name]" (click)="goToAddAutobots()"><button>Recruit new {{ fac.name }}</button></a>  <br>
     <span *ngFor="let transformer of transformers">
       <span *ngIf="transformer.factionsId == fac.id">
         <span>
           {{ transformer.name }} / {{ transformer.vehicleGroup }} / {{ transformer.vehicleType }} /
           {{ transformer.vehicleModel }} / {{ transformer.gear }} / {{ transformer.status }} / {{ transformer.factionsId }}
         </span>
-        <form action="">
-          <input type="radio" name="status" value="ok" checked>OK
-          <input type="radio" name="status" value="injured">INJURED
-          <input type="radio" name="status" value="mia">MIA
+        <form name="{{ transformer.id }}">
+          <input (click)="updateStatus(transformer.id, 'OK')" type="radio" name="status" value="OK" [(ngModel)]="transformer.status">OK
+          <input (click)="updateStatus(transformer.id, 'INJURED')" type="radio" name="status" value="INJURED" [(ngModel)]="transformer.status">INJURED
+          <input (click)="updateStatus(transformer.id, 'MIA')" type="radio" name="status" value="MIA" [(ngModel)]="transformer.status">MIA
         </form>
 
       </span>
     </span><br>
   </li>
 </ul>
+
 <!--
 <ul class="grid grid-pad">
   <li *ngFor="let transformer of transformers" >

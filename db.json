@@ -3,7 +3,8 @@
     {
       "id": 0,
       "name": "Autobots"
-    }, {
+    },
+    {
       "id": 1,
       "name": "Decepticons"
     }
@@ -86,9 +87,10 @@
         "sword",
         "shield"
       ],
-      "status": "OK",
-      "factionsId":0
-    }, {
+      "status": "MIA",
+      "factionsId": 0
+    },
+    {
       "id": 1,
       "name": "Bumblebee",
       "vehicleGroup": "Land",
@@ -99,16 +101,17 @@
       ],
       "status": "INJURED",
       "factionsId": 0
-    }, {
+    },
+    {
       "id": 2,
       "name": "Megatron",
       "vehicleGroup": "Air",
       "vehicleType": "Plane",
       "vehicleModel": "Sukhoi",
-      "gear":[
+      "gear": [
         "canon"
       ],
-      "status": "MIA",
+      "status": "INJURED",
       "factionsId": 1
     }
   ]

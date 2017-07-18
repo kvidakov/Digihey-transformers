@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+// import { NgModel } from '@angular/forms';
 
 import { TransformersService } from './transformers.service';
 import { Transformer } from '../transformer-class/transformer';
@@ -14,11 +16,13 @@ import {Factions} from '../transformer-class/factions';
 export class ListOfTransformersComponent implements OnInit {
   transformers: Transformer[];
   factions: Factions[];
+  // status: string;
   private maxId = 0;
-  constructor(private transformersService: TransformersService) { }
+  constructor(private transformersService: TransformersService, private router: Router) { }
 
   getTransformers(): void {
     this.transformersService.getTransformers().subscribe(transformers => this.transformers = transformers);
+    // document.getElementsByName(status).
   }
 
   getFactions() {
@@ -30,12 +34,37 @@ export class ListOfTransformersComponent implements OnInit {
     this.getFactions();
   }
 
+  updateStatus(id: number, status: string) {
+    const statusChanged = {
+      id: id,
+      name: this.transformers[id].name,
+      vehicleGroup: this.transformers[id].vehicleGroup,
+      vehicleType: this.transformers[id].vehicleType,
+      vehicleModel: this.transformers[id].vehicleModel,
+      gear: this.transformers[id].gear,
+      status: status,
+      factionsId: this.transformers[id].factionsId
+    };
+    // this.transformers[id].status = status;
+    console.log('Updateano -- ' + id);
+    console.log('this status --- ' + this.transformers[id].status);
+    return this.transformersService.updateStatus(id, statusChanged).subscribe((res) => {
+      // console.debug('Success!');
+      console.log(res);
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
   getMaxId(): number {
-    if ((this.transformers.length - 1) > this.maxId){
+    if ((this.transformers.length - 1) > this.maxId) {
       this.maxId = this.transformers.length - 1;
     }
     console.log(this.maxId);
     return this.maxId;
   }
 
+  goToAddAutobots() {
+    this.router.navigate(['/addAutobots']);
+  }
 }
