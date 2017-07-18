@@ -9,18 +9,20 @@ import { TransformersService } from './list-of-transformers/transformers.service
 
 import { AppRoutingModule } from './app-routing.module';
 import { AddTransformersComponent } from './add-transformers/add-transformers.component';
+import { UniquePipe } from './pipes/unique.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListOfTransformersComponent,
     AddTransformersComponent,
+    UniquePipe,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
   ],
   providers: [ TransformersService ],
   bootstrap: [AppComponent]

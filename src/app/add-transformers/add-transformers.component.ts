@@ -4,12 +4,14 @@ import { Http } from '@angular/http';
 import { TransformersService } from '../list-of-transformers/transformers.service';
 import { VehicleTypes } from '../transformer-class/vehicle-types';
 import { Factions } from '../transformer-class/factions';
+import { UniquePipe } from '../pipes/unique.pipe';
 
 @Component({
   selector: 'app-add-transformers',
   templateUrl: './add-transformers.component.html',
   styleUrls: ['./add-transformers.component.css'],
-  providers: [ TransformersService ]
+  providers: [ TransformersService ],
+
 })
 export class AddTransformersComponent implements OnInit {
   factions: Factions[];
@@ -24,9 +26,12 @@ export class AddTransformersComponent implements OnInit {
 
   getVehicleGroups() {
     console.log(this.vehicleGroup);
-    this.vehicleGroup = 'Air';
     return this.transformersService.getVehicleGroups(this.vehicleGroup)
       .subscribe(vehicleTypes => this.vehicleTypes = vehicleTypes);
+  }
+
+  filterData() {
+    const data = this.getVehicleGroups();
   }
 
   getVehicleTypes() {

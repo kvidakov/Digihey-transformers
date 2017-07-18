@@ -2,23 +2,25 @@
 <p>Choose your side wisely...</p>
 <form action="">
   <label for="faction">Faction:</label>
-  <select id="faction">
-    <option disabled>Choose side</option>
-    <option *ngFor="let fac of factions">{{ fac.name }}</option>
+  <select [(ngModel)]="selectedFaction" id="faction" name="factionSelect">
+    <option name="vehicleGroup" value="placeholder" selected disabled>Choose a side</option>
+    <option *ngFor="let fac of factions" [value]="fac.name">{{ fac.name }}</option>
   </select> <br>
   <label for="name">Name:</label>
   <input type="text" id="name"><br>
   <label for="vehicleGroup">Vehicle group:</label>
-  <select name="vehicleGroup" id="vehicleGroup">
-    <option disabled>Choose vehicle group</option>
-    <option name="vehicleGroup" value="Air" (select)="getVehicleGroups('Air')" [(ngModel)]="this.vehicleGroup">Air </option>
-    <option name="vehicleGroup" value="Sea" (select)="getVehicleGroups('Sea')" [(ngModel)]="this.vehicleGroup">Sea</option>
-    <option name="vehicleGroup" value="Land" (select)="getVehicleGroups('Land')" [(ngModel)]="this.vehicleGroup">Land</option>
-  </select>{{ vehicleGroup }}<br>
+  <select name="vehicleGroup" [(ngModel)]="vehicleGroup" id="vehicleGroup" (change)="getVehicleGroups()">
+    <option name="vehicleGroup" value="placeholder" [selected] disabled>Choose a group</option>
+    <option name="vehicleGroup" value="Air" [value]="'Air'">Air </option>
+    <option name="vehicleGroup" value="Sea" [value]="'Sea'">Sea</option>
+    <option name="vehicleGroup" value="Land" [value]="'Land'">Land</option>
+  </select><br>
   <label for="vehicleType">Vehicle type:</label>
-  <select id="vehicleType">
-    <option disabled>Choose vehicle type</option>
-    <option *ngIf="vehicleGroup ==='Air'"></option>
+  <select name="vehicleType" id="vehicleType" >
+    <option name="vehicleType" value="placeholder" disabled>Choose a type</option>
+    <option name="vehicleType" *ngFor="let vt of vehicleTypes | unique " ><span *ngIf="vt.group === vehicleGroup">{{  vt.type }}</span></option>
+    <!-- <option name="vehicleType" *ngFor="let vt of vehicleTypes | unique " ><span *ngIf="vt.group === 'Sea'">{{  vt.type }}</span></option>
+    <option name="vehicleType" *ngFor="let vt of vehicleTypes | unique " ><span *ngIf="vt.group === 'Land'">{{  vt.type }}</span></option> -->
   </select><br>
   <label for="vehicleModel">Vehicle model:</label>
   <select id="vehicleModel">

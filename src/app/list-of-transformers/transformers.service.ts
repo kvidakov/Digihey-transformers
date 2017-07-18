@@ -23,10 +23,10 @@ export class TransformersService {
     return this.http.get(`${this.apiUrl}/factions`).map((res: Response) => res.json() as Factions[]).catch(this.handleError);
   }
 
-  getVehicleGroups(groupName: string): Observable<VehicleTypes[]> {
+  getVehicleGroups(groupName): Observable<VehicleTypes[]> {
+    console.log('group name ---- ' + groupName);
     return this.http.get(`${this.apiUrl}/vehicleTypes?group=${groupName}`)
-      .map((res: Response) => res.json())
-      .catch(this.handleError);
+      .map((res: Response) => res.json() as VehicleTypes[]).catch(this.handleError);
   }
   getVehicleTypes(): Observable<VehicleTypes[]> {
     return this.http.get(`${this.apiUrl}/vehicleTypes`).map((res: Response) => res.json() as VehicleTypes[]).catch(this.handleError);

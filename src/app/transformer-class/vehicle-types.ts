@@ -1,6 +1,6 @@
-export interface VehicleTypes {
-  //group: string;
+
+export class VehicleTypes {
+  group: string;
   type: string;
   model: string;
-  //vehicleModel: string;
 }
