@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-// import { NgModel } from '@angular/forms';
 
 import { TransformersService } from './transformers.service';
 import { Transformer } from '../transformer-class/transformer';
@@ -16,6 +15,8 @@ import {Factions} from '../transformer-class/factions';
 export class ListOfTransformersComponent implements OnInit {
   transformers: Transformer[];
   factions: Factions[];
+  faction: string;
+  name: string;
   // status: string;
   private maxId = 0;
   constructor(private transformersService: TransformersService, private router: Router) { }
@@ -45,10 +46,8 @@ export class ListOfTransformersComponent implements OnInit {
       status: status,
       factionsId: this.transformers[id].factionsId
     };
-    // this.transformers[id].status = status;
-    console.log('Updateano -- ' + id);
-    console.log('this status --- ' + this.transformers[id].status);
-    return this.transformersService.updateStatus(id, statusChanged).subscribe((res) => {
+
+    return this.transformersService.update(id, statusChanged).subscribe((res) => {
       // console.debug('Success!');
       console.log(res);
     }, (err) => {
@@ -56,15 +55,7 @@ export class ListOfTransformersComponent implements OnInit {
     });
   }
 
-  getMaxId(): number {
-    if ((this.transformers.length - 1) > this.maxId) {
-      this.maxId = this.transformers.length - 1;
-    }
-    console.log(this.maxId);
-    return this.maxId;
-  }
-
-  goToAddAutobots() {
-    this.router.navigate(['/addAutobots']);
+  goToTransformerDetails(id) {
+      this.router.navigate(['/details', id]);
   }
 }

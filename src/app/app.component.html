@@ -1,5 +1,9 @@
-<nav>
-  <a [routerLink]="['/transformers']">List of transformers</a>
-  <a [routerLink]="['/addTransformers']">Recruit new transformers</a>
-</nav>
+<div class="container">
+    <div class="row">
+        <nav>
+            <button [routerLink]="['/transformers']" class="btn btn-primary" role="button">List of transformers</button>
+            <button [routerLink]="['/addTransformers']" class="btn btn-primary" role="button">Recruit new transformers</button>
+        </nav>
+    </div>
+</div>
 <router-outlet></router-outlet>

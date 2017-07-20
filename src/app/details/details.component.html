@@ -1,0 +1,62 @@
+<div *ngIf="transformer" class="container">
+    <div class="row">
+        <ul class="list-group">
+            <li class="list-group-item">Name:
+                <span>{{ name }}</span>
+                <input type="text" [(ngModel)]="name">
+            </li>
+            <li class="list-group-item">Faction:
+                <span>{{ faction }}</span>
+                <select name="selectedFaction" id="faction" [(ngModel)]="faction">
+                    <option name="selectedFaction" value="defaultOption" selected>Choose a side</option>
+                    <option name="selectedFaction" *ngFor="let fac of factions" [value]="fac.name">{{ fac.name }}</option>
+                </select>
+            </li>
+            <li class="list-group-item">Vehicle group:
+                <span>{{ vehicleGroup }}</span>
+                <select name="vehicleGroup" id="vehicleGroup" [(ngModel)]="vehicleGroup" (click)="getVehicleGroups()">
+                    <option name="vehicleGroup" value="defaultOption">Choose a group</option>
+                    <option name="vehicleGroup" value="Air" [value]="'Air'">Air </option>
+                    <option name="vehicleGroup" value="Sea" [value]="'Sea'">Sea</option>
+                    <option name="vehicleGroup" value="Land" [value]="'Land'">Land</option>
+                </select>
+            </li>
+            <li class="list-group-item">Vehicle type:
+                <span>{{ vehicleType }}</span>
+                <select name="vehicleType" id="vehicleType" [(ngModel)]="vehicleType">
+                    <option name="vehicleType" value="defaultOption">Choose a type</option>
+                    <ng-container *ngFor="let vt of vehicleTypes | unique:'type' " >
+                        <option name="vehicleType">{{  vt.type }}</option>
+                    </ng-container>
+                </select>
+            </li>
+            <li class="list-group-item">Vehicle model:
+                <span>{{ vehicleModel }}</span>
+                <select name="vehicleModel" id="vehicleModel" [(ngModel)]="vehicleModel">
+                    <option value="defaultOption">Choose vehicle model</option>
+                    <ng-container *ngFor="let vm of vehicleTypes" >
+                        <option name="vehicleModel" *ngIf="vm.type === vehicleType">{{ vm.model }}</option>
+                    </ng-container>
+                </select>
+            </li>
+            <li class="list-group-item">Status:
+                <span>{{ newStatus }}</span>
+                <form name="{{ transformer.id }}">
+                    <input type="radio" name="status" value="OK" [(ngModel)]="newStatus">OK
+                    <input type="radio" name="status" value="INJURED" [(ngModel)]="newStatus">INJURED
+                    <input type="radio" name="status" value="MIA" [(ngModel)]="newStatus">MIA
+                </form>
+            </li>
+            <li class="list-group-item">Gear:
+                <button name="moreGear" (click)="addInputField()">+</button>
+                <button name="lessGear" (click)="removeInputField()">-</button>
+                <div name="gear" id="gearDiv">
+                    <input type="text" name="gear" id="1" class="gearInput" *ngFor="let g of gear" ng-model="gear" value="{{g}}">
+                    <br>
+                </div>
+            </li>
+            <button (click)="updateTransformer(transformer.id)">Update</button>
+        </ul>
+    </div>
+
+</div>

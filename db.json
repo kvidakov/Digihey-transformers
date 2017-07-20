@@ -84,10 +84,9 @@
       "vehicleType": "Truck",
       "vehicleModel": "Western Star 5700",
       "gear": [
-        "sword",
-        "shield"
+        "sword"
       ],
-      "status": "MIA",
+      "status": "OK",
       "factionsId": 0
     },
     {
@@ -99,7 +98,7 @@
       "gear": [
         "machine gun"
       ],
-      "status": "INJURED",
+      "status": "OK",
       "factionsId": 0
     },
     {
@@ -109,9 +108,46 @@
       "vehicleType": "Plane",
       "vehicleModel": "Sukhoi",
       "gear": [
-        "canon"
+        "cannon"
       ],
-      "status": "INJURED",
+      "status": "OK",
+      "factionsId": 1
+    },
+    {
+      "id": 3,
+      "name": "Karlos",
+      "vehicleGroup": "Air",
+      "vehicleType": "Helicopter",
+      "vehicleModel": "Apache",
+      "gear": [
+        "Bombs",
+        "Ray gun"
+      ],
+      "status": "OK",
+      "factionsId": 0
+    },
+    {
+      "id": 4,
+      "name": "Bonecrusher",
+      "vehicleGroup": "Land",
+      "vehicleType": "Truck",
+      "vehicleModel": "Unimog",
+      "gear": [
+        "Pistol"
+      ],
+      "status": "OK",
+      "factionsId": 1
+    },
+    {
+      "id": 5,
+      "name": "Starscream",
+      "vehicleGroup": "Land",
+      "vehicleType": "Truck",
+      "vehicleModel": "Western Star 5700",
+      "gear": [
+        "Pistol"
+      ],
+      "status": "OK",
       "factionsId": 1
     }
   ]

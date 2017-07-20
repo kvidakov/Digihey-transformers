@@ -10,21 +10,25 @@ import { TransformersService } from './list-of-transformers/transformers.service
 import { AppRoutingModule } from './app-routing.module';
 import { AddTransformersComponent } from './add-transformers/add-transformers.component';
 import { UniquePipe } from './pipes/unique.pipe';
+import { DetailsComponent } from './details/details.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ListOfTransformersComponent,
-    AddTransformersComponent,
-    UniquePipe,
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-  ],
-  providers: [ TransformersService ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        ListOfTransformersComponent,
+        AddTransformersComponent,
+        UniquePipe,
+        DetailsComponent,
+    ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        Ng2SearchPipeModule
+    ],
+    providers: [ TransformersService ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

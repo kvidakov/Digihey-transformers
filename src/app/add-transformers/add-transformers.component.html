@@ -1,33 +1,46 @@
-
-<p>Choose your side wisely...</p>
-<form action="">
-  <label for="faction">Faction:</label>
-  <select [(ngModel)]="selectedFaction" id="faction" name="factionSelect">
-    <option name="vehicleGroup" value="placeholder" selected disabled>Choose a side</option>
-    <option *ngFor="let fac of factions" [value]="fac.name">{{ fac.name }}</option>
-  </select> <br>
-  <label for="name">Name:</label>
-  <input type="text" id="name"><br>
-  <label for="vehicleGroup">Vehicle group:</label>
-  <select name="vehicleGroup" [(ngModel)]="vehicleGroup" id="vehicleGroup" (change)="getVehicleGroups()">
-    <option name="vehicleGroup" value="placeholder" [selected] disabled>Choose a group</option>
-    <option name="vehicleGroup" value="Air" [value]="'Air'">Air </option>
-    <option name="vehicleGroup" value="Sea" [value]="'Sea'">Sea</option>
-    <option name="vehicleGroup" value="Land" [value]="'Land'">Land</option>
-  </select><br>
-  <label for="vehicleType">Vehicle type:</label>
-  <select name="vehicleType" id="vehicleType" >
-    <option name="vehicleType" value="placeholder" disabled>Choose a type</option>
-    <option name="vehicleType" *ngFor="let vt of vehicleTypes | unique " ><span *ngIf="vt.group === vehicleGroup">{{  vt.type }}</span></option>
-    <!-- <option name="vehicleType" *ngFor="let vt of vehicleTypes | unique " ><span *ngIf="vt.group === 'Sea'">{{  vt.type }}</span></option>
-    <option name="vehicleType" *ngFor="let vt of vehicleTypes | unique " ><span *ngIf="vt.group === 'Land'">{{  vt.type }}</span></option> -->
-  </select><br>
-  <label for="vehicleModel">Vehicle model:</label>
-  <select id="vehicleModel">
-    <option disabled>Choose vehicle model</option>
-    <!-- <option *ngFor="let vm of vehicleTypes">{{ vm.vehicleModel }}</option> -->
-  </select><br>
-  <label for="gear">Gear:</label>
-  <input type="text" id="gear"><br>
-</form>
-<button (click)="getVehicleGroups(vehicleTypes)">klikni2</button>
+<div class="container">
+    <div class="row">
+        <form action="submit" class="list-group">
+            <p class="list-group-item">Choose your side wisely...</p>
+            <label for="faction" class="list-group-item">Faction:
+                <select name="selectedFaction" id="faction" [(ngModel)]="selectedFaction">
+                    <option name="selectedFaction" value="defaultOption" selected disabled>Choose a side</option>
+                    <option name="selectedFaction" *ngFor="let fac of factions" [value]="fac.name">{{ fac.name }}</option>
+                </select>
+            </label>
+            <label for="name" class="list-group-item">Name:
+                <input type="text" name="name" id="name" [(ngModel)]="name">
+            </label>
+            <label for="vehicleGroup" class="list-group-item">Vehicle group:
+                <select name="vehicleGroup" id="vehicleGroup" [(ngModel)]="vehicleGroup" (click)="getVehicleGroups()">
+                    <option name="vehicleGroup" value="defaultOption" disabled>Choose a group</option>
+                    <option name="vehicleGroup" value="Air" [value]="'Air'">Air </option>
+                    <option name="vehicleGroup" value="Sea" [value]="'Sea'">Sea</option>
+                    <option name="vehicleGroup" value="Land" [value]="'Land'">Land</option>
+                </select>
+            </label>
+            <label for="vehicleType" class="list-group-item">Vehicle type:
+                <select name="vehicleType" id="vehicleType" [(ngModel)]="vehicleType">
+                    <option name="vehicleType" value="defaultOption" disabled>Choose a type</option>
+                    <ng-container *ngFor="let vt of vehicleTypes | unique:'type' " >
+                        <option name="vehicleType" *ngIf="vt.group === vehicleGroup">{{  vt.type }}</option>
+                    </ng-container>
+                </select>
+            </label>
+            <label for="vehicleModel" class="list-group-item">Vehicle model:
+                <select name="vehicleModel" id="vehicleModel" [(ngModel)]="vehicleModel">
+                    <option disabled value="defaultOption">Choose vehicle model</option>
+                    <ng-container *ngFor="let vm of vehicleTypes" >
+                        <option name="vehicleModel" *ngIf="vm.type === vehicleType">{{ vm.model }}</option>
+                    </ng-container>
+                </select>
+            </label>
+            <label for="gearDiv" class="list-group-item">Gear: <button name="moreGear" (click)="addInputField()">+</button> <button name="lessGear" (click)="removeInputField()">-</button>
+            <div name="gear" id="gearDiv">
+                <input type="text" name="gear" id="1" class="gearInput" ng-model="gear"><br>
+            </div>
+            </label>
+            <button (click)="addTransformer()">Recruit</button>
+        </form>
+    </div>
+</div>

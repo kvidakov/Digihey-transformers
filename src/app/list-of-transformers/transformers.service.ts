@@ -10,36 +10,44 @@ import { VehicleTypes } from '../transformer-class/vehicle-types';
 
 @Injectable()
 export class TransformersService {
-  private apiUrl = 'http://localhost:3000';
-  private headers = new Headers({'Content-Type': 'application/json'});
-  public maxId = 0;
-  constructor(private http: Http) { }
+    private apiUrl = 'http://localhost:3000';
+    private headers = new Headers({'Content-Type': 'application/json'});
+    public maxId = 0;
+    constructor(private http: Http) { }
 
-  getTransformers(): Observable<Transformer[]> {
-    return this.http.get(`${this.apiUrl}/transformers`).map((res: Response) => res.json() as Transformer[]).catch(this.handleError);
-  }
+    getTransformers(): Observable<Transformer[]> {
+        return this.http.get(`${this.apiUrl}/transformers`).map((res: Response) => res.json() as Transformer[]).catch(this.handleError);
+    }
 
-  getFactions(): Observable<Factions[]> {
-    return this.http.get(`${this.apiUrl}/factions`).map((res: Response) => res.json() as Factions[]).catch(this.handleError);
-  }
+    getTransformer(id): Observable<Transformer> {
+        return this.http.get(`${this.apiUrl}/transformers/${id}`).map((res: Response) => res.json() as Transformer).catch(this.handleError);
+    }
 
-  getVehicleGroups(groupName): Observable<VehicleTypes[]> {
-    console.log('group name ---- ' + groupName);
-    return this.http.get(`${this.apiUrl}/vehicleTypes?group=${groupName}`)
-      .map((res: Response) => res.json() as VehicleTypes[]).catch(this.handleError);
-  }
-  getVehicleTypes(): Observable<VehicleTypes[]> {
-    return this.http.get(`${this.apiUrl}/vehicleTypes`).map((res: Response) => res.json() as VehicleTypes[]).catch(this.handleError);
-  }
+    getFactions(): Observable<Factions[]> {
+        return this.http.get(`${this.apiUrl}/factions`).map((res: Response) => res.json() as Factions[]).catch(this.handleError);
+    }
 
-  updateStatus(id, data) {
-    console.log('data --- ' + data);
-    return this.http.put(`${this.apiUrl}/transformers/${id}`, data)
-      .map((res) => res.json()).catch(this.handleError);
-  }
+    getVehicleGroups(groupName): Observable<VehicleTypes[]> {
+        console.log('group name ---- ' + groupName);
+        return this.http.get(`${this.apiUrl}/vehicleTypes?group=${groupName}`)
+        .map((res: Response) => res.json() as VehicleTypes[]).catch(this.handleError);
+    }
+    getVehicleTypes(): Observable<VehicleTypes[]> {
+        return this.http.get(`${this.apiUrl}/vehicleTypes`).map((res: Response) => res.json() as VehicleTypes[]).catch(this.handleError);
+    }
 
-  private handleError(error: any): Observable<any> {
-    console.error('An error occurred', error);
-    return Observable.throw(error.message || error);
-  }
+    update(id, data) {
+        return this.http.put(`${this.apiUrl}/transformers/${id}`, data)
+        .map((res) => res.json()).catch(this.handleError);
+    }
+
+    addTransformer(id, name, vehicleGroup, vehicleType, vehicleModel, gear, status, factionsId) {
+        console.log('id, name, vehicleGroup, vehicleType, vehicleModel, gear, status, factionsId ------ ' + id + ' ' + name + ' ' + vehicleGroup + ' ' + vehicleType + ' ' + vehicleModel + ' ' + gear + ' ' + status + ' ' + factionsId);
+        return this.http.post(`${this.apiUrl}/transformers`, {id, name, vehicleGroup, vehicleType, vehicleModel, gear, status, factionsId}).map((res) => res.json()).catch(this.handleError);
+    }
+
+    private handleError(error: any): Observable<any> {
+        console.error('An error occurred', error);
+        return Observable.throw(error.message || error);
+    }
 }

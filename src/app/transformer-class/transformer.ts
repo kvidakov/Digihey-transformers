@@ -1,6 +1,6 @@
 export class Transformer {
   id: number;
-  gear: string;
+  gear: string[];
   name: string;
   status: string;
   vehicleGroup: string;

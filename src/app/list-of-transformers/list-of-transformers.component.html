@@ -1,38 +1,36 @@
-<h1>
-  Welcome to the apocalypse!
-</h1>
-<p>A war between Autobots and Decepticons is just around the corner.. </p>
-<ul>
-  <li *ngFor="let fac of factions">
-    <span>{{ fac.name }}</span> &nbsp; <a [routerLink]="['/add'+fac.name]" (click)="goToAddAutobots()"><button>Recruit new {{ fac.name }}</button></a>  <br>
-    <span *ngFor="let transformer of transformers">
-      <span *ngIf="transformer.factionsId == fac.id">
-        <span>
-          {{ transformer.name }} / {{ transformer.vehicleGroup }} / {{ transformer.vehicleType }} /
-          {{ transformer.vehicleModel }} / {{ transformer.gear }} / {{ transformer.status }} / {{ transformer.factionsId }}
-        </span>
-        <form name="{{ transformer.id }}">
-          <input (click)="updateStatus(transformer.id, 'OK')" type="radio" name="status" value="OK" [(ngModel)]="transformer.status">OK
-          <input (click)="updateStatus(transformer.id, 'INJURED')" type="radio" name="status" value="INJURED" [(ngModel)]="transformer.status">INJURED
-          <input (click)="updateStatus(transformer.id, 'MIA')" type="radio" name="status" value="MIA" [(ngModel)]="transformer.status">MIA
-        </form>
+<div class="container">
+    <div class="row">
+        <h1>
+            Welcome to Cybertron!
+        </h1>
+    </div>
+    <div class="row">
+        <label for=""></label>
+        <input type="text" placeholder="Search by name" [(ngModel)]="name">
+        <select name="selectedFaction" id="faction" [(ngModel)]="faction">
+            <option name="selectedFaction" value="All" selected>All</option>
+            <option name="selectedFaction" *ngFor="let fac of factions" [value]="fac.name">{{ fac.name }}</option>
+        </select>
+    </div>
+    <div class="col-md-4">
+        <ul class="list-group">
+            <li *ngFor="let fac of factions | filter: ( faction !='All' || '') && faction">
+                <span class="list-group-item active">{{ fac.name }}</span>
+                <span *ngFor="let transformer of transformers | filter:name">
+                    <span *ngIf="transformer.factionsId == fac.id">
+                        <span class="list-group-item">
+                            {{ transformer.name }}  {{ transformer.status }}  <a [routerLink]="['/details/',transformer.id]">Details</a>
+                        </span>
+                        <form name="{{ transformer.id }}" class="list-group-item">
+                            <input (click)="updateStatus(transformer.id, 'OK')" type="radio" name="status" value="OK" [(ngModel)]="transformer.status">OK
+                            <input (click)="updateStatus(transformer.id, 'INJURED')" type="radio" name="status" value="INJURED" [(ngModel)]="transformer.status">INJURED
+                            <input (click)="updateStatus(transformer.id, 'MIA')" type="radio" name="status" value="MIA" [(ngModel)]="transformer.status">MIA
+                        </form>
+                    </span>
+                </span>
+                <br>
+            </li>
+        </ul>
+    </div>
+</div>
 
-      </span>
-    </span><br>
-  </li>
-</ul>
-
-<!--
-<ul class="grid grid-pad">
-  <li *ngFor="let transformer of transformers" >
-    <span>{{ transformer.id}} </span> {{ transformer.name }} / {{ transformer.vehicleGroup }} / {{ transformer.vehicleType }} /
-    {{ transformer.vehicleModel }} / {{ transformer.gear }} / {{ transformer.status }} / {{ transformer.factionsId }}
-    <form action="">
-      <input type="radio" name="status" value="ok" checked>OK
-      <input type="radio" name="status" value="injured">INJURED
-      <input type="radio" name="status" value="mia">MIA
-    </form>
-  </li>
-</ul>
--->
-<button (click)="getMaxId()">Max id</button>
